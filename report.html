@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"
+        integrity="sha512-wUa0ktp10dgVVhWdRVfcUO4vHS0ryT42WOEcXjVVF2+2rcYBKTY7Yx7JCEzjWgPV+rj2EDUr8TwsoWF6IoIOPg=="
+        crossorigin="anonymous"></script>
+    <style>
+        img.center {
+            display: block;
+            margin: 0 auto;
+        }
+
+        body {
+            margin: 10px;
+        }
+        div#mynode{
+            margin: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mynode">
+        <img class="center" src="https://s7d2.scene7.com/is/image/Caterpillar/CM20200219-db34e-f70d2?$Type2$" alt="CAT">
+        <label for="reportName">Report Name</label>
+        <input type="text" name="reportName" id="reportname">
+        <label for="Enviornment">Environment</label>
+        <select name="" id="env">
+            <option value="Dev">Dev</option>
+            <option value="QA">QA</option>
+            <option value="prod">Production</option>
+        </select>
+        <label for="Branch">Branch Name</label>
+        <select name="" id="branch">
+            <option value="Master">Master</option>
+            <option value="Feature">Feature</option>
+        </select>
+        <button onclick="CapturePng()">Download as PNG</button>
+    </div>
+
+</body>
+<script>
+     function CapturePng() {
+        var node = document.getElementById('mynode');
+        domtoimage.toPng(node,{bgcolor:'#FFFFFF'})
+            .then(function (dataUrl) {
+                var link = document.createElement('a');
+                console.log(document.getElementById(document.getElementById('reportname').value));
+                link.download = 'Screenshot.png';
+                link.href = dataUrl;
+                link.click();
+            })
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+            });
+    }
+</script>
+</html>

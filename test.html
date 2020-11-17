@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"
+        integrity="sha512-wUa0ktp10dgVVhWdRVfcUO4vHS0ryT42WOEcXjVVF2+2rcYBKTY7Yx7JCEzjWgPV+rj2EDUr8TwsoWF6IoIOPg=="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="mynode">
+        <p style="text-align: left;"><strong><img style="display: block; margin-left: auto; margin-right: auto;"
+                    src="https://s7d2.scene7.com/is/image/Caterpillar/CM20200219-db34e-f70d2?fmt=png-alpha" alt="CAT"
+                    width="155" height="24" /></strong></p>
+        <p style="text-align: center;"><strong>CAT Sanity Report</strong></p>
+        <p><span style="font-weight: 400;"><strong>Environment</strong> -&nbsp;Dev/QA/Prod</span></p>
+        <p><span style="font-weight: 400;"><strong>Branch</strong> - master</span></p>
+        <p><span style="font-weight: 400;"><strong>UI Version</strong> -&nbsp; &lt;Latest build number&gt;</span></p>
+        <p><span style="font-weight: 400;"><strong>BE Version</strong> - &nbsp; &lt;Latest build number&gt;</span></p>
+        <p><strong>Feature Enabled</strong></p>
+        <ol>
+            <li><span style="font-weight: 400;"> &lt;Feature1&gt;</span></li>
+            <li><span style="font-weight: 400;"> &lt;Feature2&gt;</span></li>
+        </ol>
+        <p><strong>Feature Removed&nbsp;</strong></p>
+        <ol>
+            <li><span style="font-weight: 400;"> &lt;Feature1&gt;&nbsp;</span></li>
+            <li><span style="font-weight: 400;"> &lt;Feature2&gt;&nbsp;</span></li>
+        </ol>
+        <p><strong>Test Data</strong></p>
+        <ol>
+            <li><span style="font-weight: 400;"> Basic BEA Search - 1212104</span></li>
+            <li><span style="font-weight: 400;"> Dimensional Search - Wheel Loader - Straight C=400 and E=40 (Choose any
+                    valid case) (Choose any BE)</span></li>
+            <li><span style="font-weight: 400;"> Bucket Search</span></li>
+        </ol>
+        <p><span style="font-weight: 400;">3.1 - Direct Search - 9U4186</span></p>
+        <p><span style="font-weight: 400;">3.2 - Multiple bucket - 3170741</span></p>
+        <p><span style="font-weight: 400;">&nbsp;</span></p>
+        <p><span style="font-weight: 400;">&nbsp;</span></p>
+        <p><strong>BOMs created&nbsp;</strong></p>
+        <p><span style="font-weight: 400;">BOM ID 1 - &lt;Bom-id&gt;(&lt;CwsId&gt;)</span></p>
+        <p><span style="font-weight: 400;">BOM ID 2 - &lt;Bom-id&gt;(&lt;CwsId&gt;)</span></p>
+        <p><span style="font-weight: 400;">BOM ID 3 - &lt;Bom-id&gt;(&lt;Single&gt;/&lt;Multiple
+                Bucket&gt;)/(&lt;CwsId&gt;)</span></p>
+        <p><span style="font-weight: 400;">&nbsp;</span></p>
+        <p><strong>Sanity Test cases</strong></p>
+        <ol>
+            <li><span style="font-weight: 400;"> Select at least one part from each category - Save a BOM -
+                    Safari</span></li>
+            <li><span style="font-weight: 400;"> Edit works fine in Draft - Chrome</span></li>
+            <li><span style="font-weight: 400;"> Edit works fine in Saved BOM - iPad</span></li>
+            <li><span style="font-weight: 400;"> Downloading works fine - firefox</span></li>
+            <li><span style="font-weight: 400;"> Feedback works fine - iPhone6/7/8</span></li>
+        </ol>
+        <p><span style="font-weight: 400;">&nbsp;</span></p>
+        <p><strong>Regression Test cases</strong></p>
+        <p><span style="font-weight: 400;">Regression will be done only if the features are removed</span></p>
+        <p>&nbsp;</p>
+    </div>
+    <button onclick="CapturePng()">Take It</button>
+</body>
+<script>
+    function CapturePng() {
+        var node = document.getElementById('mynode');
+        domtoimage.toPng(node,{bgcolor:'#FFFFFF'})
+            .then(function (dataUrl) {
+               /* var img = new Image();
+                img.src = dataUrl;
+                document.body.appendChild(img);*/
+                var link = document.createElement('a');
+                link.download = 'my-image-name.jpeg';
+                link.href = dataUrl;
+                link.click();
+            })
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+            });
+    }
+
+    function captureJpg() {
+        domtoimage.toJpeg(document.getElementById('mynode'), { quality: 0.95 })
+            .then(function (dataUrl) {
+                var link = document.createElement('a');
+                link.download = 'my-image-name.jpeg';
+                link.href = dataUrl;
+                link.click();
+            });
+    }
+</script>
+
+</html>
